@@ -4,7 +4,7 @@ import { HeroConversation } from "./components/hero-conversation";
 
 export default function LandingPage() {
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       {/* AEO structured data */}
       <script
         type="application/ld+json"
@@ -26,7 +26,7 @@ export default function LandingPage() {
       />
 
       {/* Nav */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-card-border bg-background/90 backdrop-blur-lg">
+      <nav aria-label="Main navigation" className="fixed top-0 inset-x-0 z-50 border-b border-card-border bg-background/90 backdrop-blur-lg">
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
           <span className="font-display text-2xl tracking-tight text-foreground">
             vouch<span className="text-accent">.</span>

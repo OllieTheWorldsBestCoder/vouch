@@ -9,7 +9,7 @@ export default function GetStartedPage() {
   const [path, setPath] = useState<Path>(null);
 
   return (
-    <main className="flex-1 px-6 py-24">
+    <main id="main-content" className="flex-1 px-6 py-24">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <Link
@@ -454,9 +454,23 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers or no clipboard permission
+      const textarea = document.createElement("textarea");
+      textarea.value = code;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   return (
