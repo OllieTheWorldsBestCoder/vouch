@@ -101,8 +101,8 @@ function UserPath({ onBack }: { onBack: () => void }) {
             code="npx @vouch/cli init"
             language="terminal"
           />
-          <div className="mt-4 bg-card border border-card-border rounded-xl p-4 text-sm font-mono text-muted leading-relaxed">
-            <p className="text-accent">$ npx @vouch/cli init</p>
+          <div className="mt-4 bg-code-bg rounded-xl p-4 text-sm font-mono text-code-fg leading-relaxed">
+            <p className="text-amber-700">$ npx @vouch/cli init</p>
             <p className="mt-2">Setting up Vouch...</p>
             <p className="mt-1">What name should we use? <span className="text-foreground">Alex Johnson</span></p>
             <p>Email? <span className="text-foreground">alex@example.com</span></p>
@@ -114,7 +114,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
           {step === 1 && (
             <button
               onClick={() => setStep(2)}
-              className="mt-4 text-sm text-accent hover:underline"
+              className="mt-4 text-sm text-amber-700 hover:underline"
             >
               I&apos;ve done this, next step
             </button>
@@ -138,7 +138,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
           {step === 2 && (
             <button
               onClick={() => setStep(3)}
-              className="mt-6 text-sm text-accent hover:underline"
+              className="mt-6 text-sm text-amber-700 hover:underline"
             >
               I&apos;ve done this, what&apos;s next?
             </button>
@@ -160,7 +160,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
               Next time you ask your agent to sign you up for something, it&apos;ll
               check for Vouch support and handle it automatically. Try it:
             </p>
-            <div className="bg-[#1e1e22] border border-card-border rounded-lg p-4 text-sm">
+            <div className="bg-code-bg border border-card-border rounded-lg p-4 text-sm">
               <p className="text-muted italic">&quot;Sign me up for [any-site.com]&quot;</p>
             </div>
           </div>
@@ -180,7 +180,7 @@ function AgentSetup() {
           onClick={() => setAgent("claude")}
           className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
             agent === "claude"
-              ? "bg-accent/15 text-accent border border-accent/20"
+              ? "bg-accent/15 text-amber-700 border border-accent/20"
               : "text-muted border border-card-border hover:text-foreground"
           }`}
         >
@@ -190,7 +190,7 @@ function AgentSetup() {
           onClick={() => setAgent("other")}
           className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
             agent === "other"
-              ? "bg-accent/15 text-accent border border-accent/20"
+              ? "bg-accent/15 text-amber-700 border border-accent/20"
               : "text-muted border border-card-border hover:text-foreground"
           }`}
         >
@@ -278,7 +278,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
             Works with any Node.js framework: Next.js, Express, Fastify, Hono.
           </p>
           {step === 1 && (
-            <button onClick={() => setStep(2)} className="mt-4 text-sm text-accent hover:underline">
+            <button onClick={() => setStep(2)} className="mt-4 text-sm text-amber-700 hover:underline">
               Installed, next step
             </button>
           )}
@@ -316,7 +316,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
           </div>
 
           {step === 2 && (
-            <button onClick={() => setStep(3)} className="mt-4 text-sm text-accent hover:underline">
+            <button onClick={() => setStep(3)} className="mt-4 text-sm text-amber-700 hover:underline">
               Added, next step
             </button>
           )}
@@ -341,7 +341,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
           />
 
           {step === 3 && (
-            <button onClick={() => setStep(4)} className="mt-4 text-sm text-accent hover:underline">
+            <button onClick={() => setStep(4)} className="mt-4 text-sm text-amber-700 hover:underline">
               Deployed
             </button>
           )}
@@ -361,7 +361,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
             <p className="text-sm text-muted">
               AI agents can now discover your site and sign up users with
               verified, cryptographic consent. No marketplace listing needed --
-              the <code className="text-xs px-1 py-0.5 rounded bg-[#1e1e22] border border-card-border font-mono">.well-known/vouch.json</code> manifest
+              the <code className="text-xs px-1 py-0.5 rounded bg-code-bg border border-card-border font-mono">.well-known/vouch.json</code> manifest
               is your storefront.
             </p>
           </div>
@@ -393,14 +393,14 @@ function PathCard({
       onClick={onClick}
       className="group bg-card border border-card-border rounded-xl p-6 text-left hover:border-accent/30 transition-all"
     >
-      <div className="w-10 h-10 rounded-lg bg-accent-soft border border-accent/20 flex items-center justify-center text-accent mb-5">
+      <div className="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 mb-5">
         {icon}
       </div>
-      <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">
+      <h3 className="text-lg font-semibold mb-2 group-hover:text-amber-700 transition-colors">
         {title}
       </h3>
       <p className="text-sm text-muted leading-relaxed mb-5">{description}</p>
-      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-700">
         {cta}
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
           <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -431,7 +431,7 @@ function StepBlock({
             done
               ? "bg-success/15 text-success border border-success/20"
               : active
-                ? "bg-accent/15 text-accent border border-accent/20"
+                ? "bg-accent/15 text-amber-700 border border-accent/20"
                 : "bg-card border border-card-border text-muted"
           }`}
         >
@@ -460,7 +460,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   }
 
   return (
-    <div className="group relative bg-[#1e1e22] border border-card-border rounded-lg px-4 py-3 font-mono text-sm">
+    <div className="group relative bg-code-bg border border-card-border rounded-lg px-4 py-3 font-mono text-sm">
       {language === "terminal" && <span className="text-muted select-none">$ </span>}
       <span className="text-foreground">{code}</span>
       <button

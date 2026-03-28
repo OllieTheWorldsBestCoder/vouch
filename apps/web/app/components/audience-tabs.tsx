@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Tab = "users" | "businesses" | "developers";
 
@@ -9,15 +10,14 @@ export function AudienceTabs() {
 
   return (
     <div>
-      {/* Tab buttons */}
-      <div className="flex gap-1 p-1 bg-card rounded-xl border border-card-border mb-8 max-w-md">
+      <div className="flex gap-1 p-1 bg-surface rounded-lg border border-card-border mb-10 w-fit">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActive(tab.id)}
-            className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+            className={`px-5 py-2 rounded-md text-sm font-medium transition-all ${
               active === tab.id
-                ? "bg-accent text-background"
+                ? "bg-card text-foreground shadow-sm"
                 : "text-muted hover:text-foreground"
             }`}
           >
@@ -26,12 +26,9 @@ export function AudienceTabs() {
         ))}
       </div>
 
-      {/* Tab content */}
-      <div className="min-h-[420px]">
-        {active === "users" && <UsersContent />}
-        {active === "businesses" && <BusinessesContent />}
-        {active === "developers" && <DevelopersContent />}
-      </div>
+      {active === "users" && <UsersContent />}
+      {active === "businesses" && <BusinessesContent />}
+      {active === "developers" && <DevelopersContent />}
     </div>
   );
 }
@@ -44,41 +41,34 @@ const TABS: { id: Tab; label: string }[] = [
 
 function UsersContent() {
   return (
-    <div className="animate-fade-up grid lg:grid-cols-2 gap-12 items-start">
-      <div>
-        <h3 className="text-2xl font-bold tracking-tight mb-3">
-          Fill out your details once. Never again.
-        </h3>
-        <p className="text-muted leading-relaxed mb-6">
-          Your AI agent discovers what a site needs, shows you what it&apos;ll share,
-          and handles the rest. Your details stay encrypted on your device.
-        </p>
-        <div className="space-y-4">
-          <Feature
-            title="Encrypted on your device"
-            description="AES-256 encryption. No cloud. No accounts. One file you own."
-          />
-          <Feature
-            title="You approve every signup"
-            description="See exactly what's shared before it's sent. Or set rules to auto-approve trusted sites."
-          />
-          <Feature
-            title="Works everywhere"
-            description="Even on sites that haven't installed Vouch, your agent opens the page and fills in the form."
-          />
+    <div className="animate-fade-up">
+      <div className="grid lg:grid-cols-5 gap-10 items-start">
+        <div className="lg:col-span-3">
+          <h3 className="font-display text-3xl mb-3 text-foreground">
+            Fill out your details once.<br />Never again.
+          </h3>
+          <p className="text-muted leading-relaxed mb-8 max-w-md">
+            Your AI agent discovers what a site needs, shows you what it&apos;ll share,
+            and handles the rest. Everything stays encrypted on your device.
+          </p>
+
+          <div className="space-y-5 mb-8">
+            <Feature title="Encrypted on your device" description="One file, one password. No cloud. No accounts." />
+            <Feature title="You approve every signup" description="See exactly what's shared. Or set rules to auto-approve trusted sites." />
+            <Feature title="Works even without Vouch" description="Your agent opens the page and fills the form with your saved details." />
+          </div>
+
+          <Link href="/signup" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors">
+            Set up your vault
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </Link>
         </div>
-      </div>
-      <div className="bg-card border border-card-border rounded-xl p-6">
-        <div className="space-y-3 text-sm">
+
+        <div className="lg:col-span-2 bg-code-bg rounded-xl p-5 text-sm space-y-2.5">
           <ChatBubble from="user">Sign me up for acme.com</ChatBubble>
-          <ChatBubble from="agent">
-            <span className="block mb-3">Sign up for ACME?</span>
-            <span className="block text-xs text-muted mb-2 uppercase tracking-wider">They&apos;ll get</span>
-            <span className="block">Alex Johnson</span>
-            <span className="block text-muted">alex@example.com</span>
-          </ChatBubble>
+          <ChatBubble from="agent">Sign up for ACME? They&apos;ll get your name and email.</ChatBubble>
           <ChatBubble from="user">Go for it</ChatBubble>
-          <ChatBubble from="agent">Done. Check your email to verify.</ChatBubble>
+          <ChatBubble from="agent">Done. Check your email.</ChatBubble>
         </div>
       </div>
     </div>
@@ -87,43 +77,34 @@ function UsersContent() {
 
 function BusinessesContent() {
   return (
-    <div className="animate-fade-up grid lg:grid-cols-2 gap-12 items-start">
-      <div>
-        <h3 className="text-2xl font-bold tracking-tight mb-3">
-          A new signup channel. Zero friction.
-        </h3>
-        <p className="text-muted leading-relaxed mb-6">
-          Millions of people use AI agents daily. When they say &quot;sign me up,&quot;
-          your site should be ready. Vouch lets agents register users for you
-          with verified, consented data.
-        </p>
-        <div className="space-y-4">
-          <Feature
-            title="Higher conversion"
-            description="Agent signups complete in seconds. No form abandonment. No typos."
-          />
-          <Feature
-            title="Verified data"
-            description="Cryptographic consent proves the user approved. Email verification built in."
-          />
-          <Feature
-            title="New acquisition channel"
-            description="Be discoverable to every AI agent. Your .well-known/vouch.json is your storefront."
-          />
+    <div className="animate-fade-up">
+      <div className="grid lg:grid-cols-5 gap-10 items-start">
+        <div className="lg:col-span-3">
+          <h3 className="font-display text-3xl mb-3 text-foreground">
+            A new signup channel.<br />Zero friction.
+          </h3>
+          <p className="text-muted leading-relaxed mb-8 max-w-md">
+            Millions use AI agents daily. When they say &quot;sign me up,&quot;
+            your site should be ready. Vouch lets agents register users with
+            verified, consented data.
+          </p>
+
+          <div className="space-y-5 mb-8">
+            <Feature title="Higher conversion" description="Agent signups complete in seconds. No form abandonment, no typos." />
+            <Feature title="Verified data" description="Cryptographic consent proves the user approved. Email verification built in." />
+            <Feature title="Discoverable by every agent" description="Your .well-known/vouch.json is your storefront. No marketplace listing needed." />
+          </div>
+
+          <Link href="/signup" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors">
+            Add Vouch to your site
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </Link>
         </div>
-      </div>
-      <div className="bg-card border border-card-border rounded-xl p-6 space-y-5">
-        <div className="flex items-center gap-4">
-          <div className="text-3xl font-bold text-accent">3s</div>
-          <div className="text-sm text-muted">Average signup time<br />vs 45s for traditional forms</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="text-3xl font-bold text-accent">0%</div>
-          <div className="text-sm text-muted">Form abandonment<br />Agent completes every signup it starts</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="text-3xl font-bold text-accent">100%</div>
-          <div className="text-sm text-muted">Verified consent<br />Cryptographic proof the user approved</div>
+
+        <div className="lg:col-span-2 space-y-4">
+          <Stat value="~3s" label="Average signup" detail="vs 45s for forms" />
+          <Stat value="0%" label="Form abandonment" detail="Agents complete every signup" />
+          <Stat value="100%" label="Verified consent" detail="Cryptographic proof" />
         </div>
       </div>
     </div>
@@ -132,40 +113,38 @@ function BusinessesContent() {
 
 function DevelopersContent() {
   return (
-    <div className="animate-fade-up grid lg:grid-cols-2 gap-12 items-start">
-      <div>
-        <h3 className="text-2xl font-bold tracking-tight mb-3">
-          One function. That&apos;s the integration.
-        </h3>
-        <p className="text-muted leading-relaxed mb-6">
-          Install the package. Define your fields. Write your signup handler.
-          Vouch serves the discovery manifest, validates consent tokens, and handles
-          verification.
-        </p>
-        <div className="space-y-4">
-          <Feature
-            title="15-minute integration"
-            description="npm install, one function, two route handlers. Works with Next.js, Express, Fastify."
-          />
-          <Feature
-            title="MCP + REST"
-            description="Agents discover your site via .well-known/vouch.json. MCP tools and REST API included."
-          />
-          <Feature
-            title="Open protocol"
-            description="No vendor lock-in. Ed25519 signatures, JWS tokens, Zod schemas. Implement from spec if you want."
-          />
+    <div className="animate-fade-up">
+      <div className="grid lg:grid-cols-5 gap-10 items-start">
+        <div className="lg:col-span-3">
+          <h3 className="font-display text-3xl mb-3 text-foreground">
+            One function.<br />That&apos;s the integration.
+          </h3>
+          <p className="text-muted leading-relaxed mb-8 max-w-md">
+            Install the package. Define your fields. Write your handler.
+            Vouch serves the discovery manifest, validates consent tokens,
+            and handles verification. Open protocol, no lock-in.
+          </p>
+
+          <div className="space-y-5 mb-8">
+            <Feature title="15-minute integration" description="npm install, one function, two route handlers. Next.js, Express, Fastify." />
+            <Feature title="MCP + REST" description="Agents discover you via .well-known/vouch.json. MCP tools and REST included." />
+            <Feature title="Agents find you automatically" description="No marketplace listing. Your manifest is your storefront." />
+          </div>
+
+          <Link href="/signup" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors">
+            Install the SDK
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </Link>
         </div>
-      </div>
-      <div className="bg-card border border-card-border rounded-xl overflow-hidden">
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-card-border">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-          <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-          <span className="ml-3 text-xs text-muted font-mono">route.ts</span>
-        </div>
-        <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-muted">
-          <code>{`import { createVouchHandler } from "@vouch/site";
+
+        <div className="lg:col-span-2">
+          <div className="bg-code-bg rounded-xl overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800">
+              <span className="text-[11px] text-zinc-500 font-mono">route.ts</span>
+            </div>
+            <pre className="p-4 overflow-x-auto text-[12px] leading-relaxed font-mono text-code-fg">
+              <code>{`import { createVouchHandler }
+  from "@vouch/site";
 
 const handler = createVouchHandler({
   site: {
@@ -189,46 +168,41 @@ const handler = createVouchHandler({
 
 export const GET = handler.GET;
 export const POST = handler.POST;`}</code>
-        </pre>
+            </pre>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-function Feature({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function Feature({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex gap-3">
-      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-      <div>
-        <p className="text-sm font-medium mb-0.5">{title}</p>
-        <p className="text-sm text-muted">{description}</p>
-      </div>
+    <div>
+      <p className="text-sm font-semibold text-foreground">{title}</p>
+      <p className="text-sm text-muted">{description}</p>
     </div>
   );
 }
 
-function ChatBubble({
-  from,
-  children,
-}: {
-  from: "user" | "agent";
-  children: React.ReactNode;
-}) {
+function Stat({ value, label, detail }: { value: string; label: string; detail: string }) {
+  return (
+    <div className="border-l-2 border-accent-border pl-4 py-1">
+      <span className="font-display text-2xl text-foreground">{value}</span>
+      <p className="text-sm font-medium text-foreground">{label}</p>
+      <p className="text-xs text-muted">{detail}</p>
+    </div>
+  );
+}
+
+function ChatBubble({ from, children }: { from: "user" | "agent"; children: React.ReactNode }) {
   return (
     <div className={`flex ${from === "user" ? "justify-end" : "justify-start"}`}>
-      <div
-        className={`max-w-[85%] px-4 py-2.5 rounded-2xl leading-relaxed ${
-          from === "user"
-            ? "bg-accent/15 text-accent border border-accent/20 rounded-br-md"
-            : "bg-[#1e1e22] border border-card-border rounded-bl-md"
-        }`}
-      >
+      <div className={`max-w-[85%] px-3.5 py-2 rounded-2xl text-[13px] leading-relaxed ${
+        from === "user"
+          ? "bg-amber-900/40 text-amber-200 rounded-br-sm"
+          : "bg-zinc-800 text-zinc-300 rounded-bl-sm"
+      }`}>
         {children}
       </div>
     </div>
