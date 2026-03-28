@@ -29,7 +29,7 @@ export default function LandingPage() {
       {/* Nav */}
       <nav className="fixed top-0 inset-x-0 z-50 border-b border-card-border/50 bg-background/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="text-sm font-semibold tracking-tight">
+          <span className="text-xl font-bold tracking-tight">
             vouch<span className="text-accent">.</span>
           </span>
           <div className="flex items-center gap-6">
@@ -243,7 +243,7 @@ export default function LandingPage() {
       <footer className="border-t border-card-border/50 py-8 px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs text-muted">
           <span>
-            vouch<span className="text-accent">.</span> protocol v1.0
+            <span className="font-semibold">vouch<span className="text-accent">.</span></span> protocol v1.0
           </span>
           <span>Open source &middot; No central server &middot; Your data, your device</span>
         </div>
