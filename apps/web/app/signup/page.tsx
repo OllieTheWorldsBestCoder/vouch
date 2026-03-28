@@ -50,7 +50,7 @@ export default function SignupPage() {
               Save your details
             </h1>
             <p className="text-muted text-sm mb-8">
-              This stays on your device. Your agent uses it to sign you up for things.
+              Vouch keeps this on your device. Your agent uses it to sign you up for things.
             </p>
 
             <form onSubmit={handleDetailsSubmit} className="space-y-5">

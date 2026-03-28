@@ -14,7 +14,7 @@ const CONVERSATION: Message[] = [
   { from: "user", text: "Alex Johnson", delay: 1800 },
   { from: "agent", text: "And your email?", delay: 2400 },
   { from: "user", text: "alex@example.com", delay: 3400 },
-  { from: "agent", text: "Done. Check your email to verify.\nI saved your details for next time.", delay: 4200 },
+  { from: "agent", text: "Done. Check your email to verify.\nVouch saved your details for next time.", delay: 4200 },
 ];
 
 export function HeroConversation() {

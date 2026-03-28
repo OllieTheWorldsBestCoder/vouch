@@ -13,9 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agent Signup",
+  title: "Vouch - Your agent vouches for you",
   description:
-    "Let your AI agent sign you up for things. One vault, any site, zero forms.",
+    "Open protocol for AI agent-driven signups. Save your identity once. Your agent discovers sites, gets your consent, and signs you up. Install @vouch/site to accept agent signups.",
+  keywords:
+    "vouch, agent signup, AI agent registration, MCP tools, automated signup, well-known vouch, agent authentication protocol",
 };
 
 export default function RootLayout({
