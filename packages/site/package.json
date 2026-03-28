@@ -1,0 +1,24 @@
+{
+  "name": "@agent-signup/site",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./stores/redis": "./dist/stores/redis.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agent-signup/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
