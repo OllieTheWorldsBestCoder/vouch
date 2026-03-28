@@ -15,7 +15,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@agent-signup/protocol": "workspace:*"
+    "@agent-signup/protocol": "workspace:*",
+    "zod": "^3.24.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0",

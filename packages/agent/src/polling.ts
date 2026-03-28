@@ -1,5 +1,4 @@
-import type { SignupResponse } from "@agent-signup/protocol";
-import type { AgentSignupClient } from "./client.js";
+import type { AgentSignupClient, StatusResponse } from "./client.js";
 
 // ---------------------------------------------------------------------------
 // Options
@@ -26,7 +25,7 @@ export interface WaitForVerificationOptions {
  *
  * Respects `Retry-After` headers when the server provides them.
  *
- * @returns The final {@link SignupResponse} once the status is no longer
+ * @returns The final {@link StatusResponse} once the status is no longer
  *          `pending_verification`, or the last response if the timeout is
  *          reached.
  */
@@ -35,7 +34,7 @@ export async function waitForVerification(
   siteUrl: string,
   signupId: string,
   options?: WaitForVerificationOptions,
-): Promise<SignupResponse> {
+): Promise<StatusResponse> {
   const maxWaitMs = options?.maxWaitMs ?? 30 * 60 * 1000; // 30 min
   const initialIntervalMs = options?.initialIntervalMs ?? 5_000;
   const maxIntervalMs = options?.maxIntervalMs ?? 30_000;
@@ -43,7 +42,7 @@ export async function waitForVerification(
 
   const deadline = Date.now() + maxWaitMs;
   let interval = initialIntervalMs;
-  let lastResponse: SignupResponse | undefined;
+  let lastResponse: StatusResponse | undefined;
 
   while (Date.now() < deadline) {
     if (signal?.aborted) {
@@ -51,7 +50,7 @@ export async function waitForVerification(
       throw new DOMException("Polling aborted", "AbortError");
     }
 
-    let response: SignupResponse;
+    let response: StatusResponse;
     try {
       response = await client.checkStatus(siteUrl, signupId);
     } catch (err) {

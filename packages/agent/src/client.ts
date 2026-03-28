@@ -6,10 +6,12 @@ import {
   type AgentSignupError,
   ChallengeResponseSchema,
   SignupResponseSchema,
+  SignupStatusSchema,
   AgentSignupErrorSchema,
   ErrorCodes,
   createError,
 } from "@agent-signup/protocol";
+import { z } from "zod";
 import { DiscoveryCache } from "./discovery.js";
 
 // ---------------------------------------------------------------------------
@@ -32,8 +34,15 @@ export class AgentSignupClientError extends Error {
 // Status response (GET /status/:id)
 // ---------------------------------------------------------------------------
 
-/** The shape returned by `checkStatus`. Reuses SignupResponse from protocol. */
-export type StatusResponse = SignupResponse;
+/** The shape returned by `checkStatus`. A subset of SignupResponse (status endpoint doesn't include verification). */
+const StatusResponseSchema = z.object({
+  signup_id: z.string(),
+  status: SignupStatusSchema,
+  created_at: z.string().optional(),
+  expires_at: z.string().optional(),
+});
+
+export type StatusResponse = z.infer<typeof StatusResponseSchema>;
 
 // ---------------------------------------------------------------------------
 // Verification response
@@ -138,7 +147,7 @@ export class AgentSignupClient {
     }
 
     const body = await res.json();
-    return SignupResponseSchema.parse(body);
+    return StatusResponseSchema.parse(body);
   }
 
   /**
