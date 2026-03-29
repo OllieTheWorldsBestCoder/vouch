@@ -24,7 +24,7 @@ export default function GetStartedPage() {
 
         {!path && (
           <div className="animate-fade-up">
-            <h1 className="text-3xl font-bold tracking-tight mb-3">
+            <h1 className="font-display text-4xl tracking-tight mb-3">
               Get started with Vouch
             </h1>
             <p className="text-muted mb-12 max-w-md">
@@ -77,7 +77,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
         Choose a different path
       </button>
 
-      <h1 className="text-3xl font-bold tracking-tight mb-3">
+      <h1 className="font-display text-4xl tracking-tight mb-3">
         Set up Vouch
       </h1>
       <p className="text-muted mb-10">
@@ -262,7 +262,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
         Choose a different path
       </button>
 
-      <h1 className="text-3xl font-bold tracking-tight mb-3">
+      <h1 className="font-display text-4xl tracking-tight mb-3">
         Add Vouch to your site
       </h1>
       <p className="text-muted mb-10">
