@@ -3,7 +3,7 @@ import {
   AgentSignupClient,
   type StatusResponse,
   type VerificationResponse,
-} from "@agent-signup/agent";
+} from "@vouchagents/agent";
 import {
   Vault,
   FileStorage,
@@ -11,8 +11,8 @@ import {
   defaultVaultPath,
   generatePassword,
   type ConsentRequest,
-} from "@agent-signup/client";
-import type { AgentSignupDiscovery, SignupResponse } from "@agent-signup/protocol";
+} from "@vouchagents/client";
+import type { AgentSignupDiscovery, SignupResponse } from "@vouchagents/protocol";
 
 // ---------------------------------------------------------------------------
 // JSON-RPC types

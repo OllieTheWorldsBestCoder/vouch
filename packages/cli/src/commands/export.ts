@@ -1,4 +1,4 @@
-import { Vault, FileStorage, defaultVaultPath } from "@agent-signup/client";
+import { Vault, FileStorage, defaultVaultPath } from "@vouchagents/client";
 import { writeFile } from "node:fs/promises";
 import { askSecret, close } from "../prompt.js";
 

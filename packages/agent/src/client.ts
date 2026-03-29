@@ -10,7 +10,7 @@ import {
   AgentSignupErrorSchema,
   ErrorCodes,
   createError,
-} from "@agent-signup/protocol";
+} from "@vouchagents/protocol";
 import { z } from "zod";
 import { DiscoveryCache } from "./discovery.js";
 

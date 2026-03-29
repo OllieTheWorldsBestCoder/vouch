@@ -12,8 +12,8 @@
  * Run: npx tsx demo/agent-signup-flow.ts
  * (Make sure demo/test-site.ts is running first)
  */
-import { AgentSignupClient } from "@agent-signup/agent";
-import { Vault, MemoryStorage, ConsentManager } from "@agent-signup/client";
+import { AgentSignupClient } from "@vouchagents/agent";
+import { Vault, MemoryStorage, ConsentManager } from "@vouchagents/client";
 
 const SITE_URL = "http://localhost:3456";
 

@@ -1,4 +1,4 @@
-import type { AgentSignupError } from "@agent-signup/protocol";
+import type { AgentSignupError } from "@vouchagents/protocol";
 
 // ---------------------------------------------------------------------------
 // Field configuration

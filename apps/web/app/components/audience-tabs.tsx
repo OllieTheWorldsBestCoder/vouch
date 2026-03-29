@@ -144,7 +144,7 @@ function DevelopersContent() {
             </div>
             <pre className="p-4 overflow-x-auto text-[12px] leading-relaxed font-mono text-code-fg">
               <code>{`import { createVouchHandler }
-  from "@vouch/site";
+  from "@vouchagents/site";
 
 const handler = createVouchHandler({
   site: {

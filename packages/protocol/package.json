@@ -1,5 +1,5 @@
 {
-  "name": "@agent-signup/protocol",
+  "name": "@vouchagents/protocol",
   "version": "0.1.0",
   "type": "module",
   "exports": {

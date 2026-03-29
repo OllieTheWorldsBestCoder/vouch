@@ -1,11 +1,11 @@
 /**
- * Demo: A minimal test site using @agent-signup/site.
+ * Demo: A minimal test site using @vouchagents/site.
  *
  * Run with: npx tsx demo/test-site.ts
  * Then run demo/agent-signup-flow.ts in another terminal.
  */
 import { createServer } from "node:http";
-import { createAgentSignupHandler } from "@agent-signup/site";
+import { createAgentSignupHandler } from "@vouchagents/site";
 
 const PORT = 3456;
 const SITE_URL = `http://localhost:${PORT}`;

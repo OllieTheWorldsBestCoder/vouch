@@ -57,7 +57,7 @@ importers:
 
   packages/agent:
     dependencies:
-      '@agent-signup/protocol':
+      '@vouchagents/protocol':
         specifier: workspace:*
         version: link:../protocol
       zod:
@@ -73,10 +73,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@agent-signup/client':
+      '@vouchagents/client':
         specifier: workspace:*
         version: link:../client
-      '@agent-signup/protocol':
+      '@vouchagents/protocol':
         specifier: workspace:*
         version: link:../protocol
     devDependencies:
@@ -89,7 +89,7 @@ importers:
 
   packages/client:
     dependencies:
-      '@agent-signup/protocol':
+      '@vouchagents/protocol':
         specifier: workspace:*
         version: link:../protocol
     devDependencies:
@@ -105,18 +105,18 @@ importers:
 
   packages/mcp-server:
     dependencies:
-      '@agent-signup/agent':
-        specifier: workspace:*
-        version: link:../agent
-      '@agent-signup/client':
-        specifier: workspace:*
-        version: link:../client
-      '@agent-signup/protocol':
-        specifier: workspace:*
-        version: link:../protocol
       '@modelcontextprotocol/sdk':
         specifier: ^1.0.0
         version: 1.28.0(zod@3.25.76)
+      '@vouchagents/agent':
+        specifier: workspace:*
+        version: link:../agent
+      '@vouchagents/client':
+        specifier: workspace:*
+        version: link:../client
+      '@vouchagents/protocol':
+        specifier: workspace:*
+        version: link:../protocol
     devDependencies:
       '@types/node':
         specifier: ^22.0.0
@@ -146,7 +146,7 @@ importers:
 
   packages/site:
     dependencies:
-      '@agent-signup/protocol':
+      '@vouchagents/protocol':
         specifier: workspace:*
         version: link:../protocol
     devDependencies:

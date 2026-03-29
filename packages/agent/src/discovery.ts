@@ -1,7 +1,7 @@
 import {
   AgentSignupDiscoverySchema,
   type AgentSignupDiscovery,
-} from "@agent-signup/protocol";
+} from "@vouchagents/protocol";
 
 const WELL_KNOWN_PATH = "/.well-known/agent-signup.json";
 

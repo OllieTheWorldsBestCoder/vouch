@@ -8,7 +8,7 @@ import {
   base64urlDecode,
   type KeyPair,
   SensitiveString,
-} from "@agent-signup/protocol";
+} from "@vouchagents/protocol";
 import type { StorageBackend } from "./storage.js";
 
 export interface VaultData {

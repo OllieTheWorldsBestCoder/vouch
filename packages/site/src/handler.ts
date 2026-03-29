@@ -4,7 +4,7 @@ import {
   validateConsentToken,
   createError,
   base64urlDecode,
-} from "@agent-signup/protocol";
+} from "@vouchagents/protocol";
 
 import type { AgentSignupConfig, NonceStore } from "./types.js";
 import { buildManifest } from "./manifest.js";

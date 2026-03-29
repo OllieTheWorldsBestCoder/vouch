@@ -1,4 +1,4 @@
-import { Vault, FileStorage, defaultVaultPath } from "@agent-signup/client";
+import { Vault, FileStorage, defaultVaultPath } from "@vouchagents/client";
 import { ask, askSecret, close } from "../prompt.js";
 
 export async function initCommand(vaultPath?: string) {

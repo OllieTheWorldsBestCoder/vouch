@@ -1,5 +1,5 @@
 {
-  "name": "@agent-signup/site",
+  "name": "@vouchagents/site",
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -14,7 +14,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@agent-signup/protocol": "workspace:*"
+    "@vouchagents/protocol": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",

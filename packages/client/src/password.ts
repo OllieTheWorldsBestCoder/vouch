@@ -1,4 +1,4 @@
-import { SensitiveString } from "@agent-signup/protocol";
+import { SensitiveString } from "@vouchagents/protocol";
 
 export interface PasswordPolicy {
   minLength?: number;

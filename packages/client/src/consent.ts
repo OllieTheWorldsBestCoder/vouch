@@ -3,7 +3,7 @@ import {
   canonicalHash,
   SensitiveString,
   type AgentSignupDiscovery,
-} from "@agent-signup/protocol";
+} from "@vouchagents/protocol";
 import type { Vault } from "./vault/vault.js";
 
 export interface ConsentRequest {

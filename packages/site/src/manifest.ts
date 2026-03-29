@@ -1,4 +1,4 @@
-import type { AgentSignupDiscovery } from "@agent-signup/protocol";
+import type { AgentSignupDiscovery } from "@vouchagents/protocol";
 import type { AgentSignupConfig, FieldConfig, CustomFieldConfig } from "./types.js";
 
 /**

@@ -108,7 +108,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
 
       {agent === "claude" && (
         <div className="space-y-4">
-          <CodeBlock code="claude mcp add vouch -- npx @vouch/mcp-server" language="terminal" />
+          <CodeBlock code="claude mcp add vouch -- npx @vouchagents/mcp-server" language="terminal" />
           <p className="text-sm text-muted">
             Paste this into your terminal. That&apos;s the entire setup.
           </p>
@@ -117,7 +117,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
 
       {agent === "other" && (
         <div className="space-y-4">
-          <CodeBlock code="npx @vouch/mcp-server" language="terminal" />
+          <CodeBlock code="npx @vouchagents/mcp-server" language="terminal" />
           <p className="text-sm text-muted">
             Point your agent&apos;s MCP settings at this server. It exposes 6 tools for discovering sites and signing you up.
           </p>
@@ -193,7 +193,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
 
       <div className="space-y-8">
         <StepBlock number={1} title="Install the SDK" active={step >= 1} done={step > 1}>
-          <CodeBlock code="npm install @vouch/site" language="terminal" />
+          <CodeBlock code="npm install @vouchagents/site" language="terminal" />
           <p className="text-sm text-muted mt-3">
             Works with Next.js, Express, Fastify, Hono -- any Node.js framework.
           </p>
@@ -333,7 +333,7 @@ function BuildingIcon() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M8 10h.01M16 10h.01M12 14h.01M8 14h.01M16 14h.01" /></svg>;
 }
 
-const businessCodeExample = `import { createVouchHandler } from "@vouch/site";
+const businessCodeExample = `import { createVouchHandler } from "@vouchagents/site";
 
 const handler = createVouchHandler({
   site: {

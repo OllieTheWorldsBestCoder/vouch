@@ -1,5 +1,5 @@
 {
-  "name": "@vouch/cli",
+  "name": "@vouchagents/cli",
   "version": "0.1.0",
   "type": "module",
   "bin": {
@@ -11,8 +11,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@agent-signup/protocol": "workspace:*",
-    "@agent-signup/client": "workspace:*"
+    "@vouchagents/protocol": "workspace:*",
+    "@vouchagents/client": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
