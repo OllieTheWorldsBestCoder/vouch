@@ -1,0 +1,21 @@
+{
+  "name": "@vouch/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "vouch": "./dist/bin.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agent-signup/protocol": "workspace:*",
+    "@agent-signup/client": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^25.5.0"
+  }
+}

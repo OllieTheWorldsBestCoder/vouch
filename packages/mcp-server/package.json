@@ -1,0 +1,21 @@
+{
+  "name": "@vouch/mcp-server",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": { "vouch-mcp-server": "./dist/bin.js" },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agent-signup/protocol": "workspace:*",
+    "@agent-signup/agent": "workspace:*",
+    "@agent-signup/client": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}
