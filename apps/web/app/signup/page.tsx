@@ -11,7 +11,6 @@ export default function GetStartedPage() {
   return (
     <main id="main-content" className="flex-1 px-6 py-24">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors mb-12"
@@ -28,17 +27,15 @@ export default function GetStartedPage() {
               Get started with Vouch
             </h1>
             <p className="text-muted mb-12 max-w-md">
-              Choose your path. Users save their details for agent signups.
-              Businesses accept agent signups on their site.
+              Choose your path. Users set up their agent. Businesses add the SDK.
             </p>
-
             <div className="grid sm:grid-cols-2 gap-6">
               <PathCard
                 onClick={() => setPath("user")}
                 icon={<UserIcon />}
                 title="I use an AI agent"
-                description="Set up Vouch so your agent can sign you up for things. Takes about 2 minutes."
-                cta="Set up my vault"
+                description="One command. Your agent handles the rest. Takes 30 seconds."
+                cta="Set up Vouch"
               />
               <PathCard
                 onClick={() => setPath("business")}
@@ -59,11 +56,12 @@ export default function GetStartedPage() {
 }
 
 /* ============================================================
-   USER PATH
+   USER PATH - One command, agent handles the rest
    ============================================================ */
 
 function UserPath({ onBack }: { onBack: () => void }) {
-  const [step, setStep] = useState(1);
+  const [done, setDone] = useState(false);
+  const [agent, setAgent] = useState<"claude" | "other">("claude");
 
   return (
     <div className="animate-fade-up max-w-2xl">
@@ -78,109 +76,19 @@ function UserPath({ onBack }: { onBack: () => void }) {
       </button>
 
       <h1 className="font-display text-4xl tracking-tight mb-3">
-        Set up Vouch
+        One command. That&apos;s it.
       </h1>
-      <p className="text-muted mb-10">
-        Two steps: create your encrypted vault, then connect it to your AI agent.
+      <p className="text-muted mb-8">
+        Paste this into your terminal. It connects Vouch to your agent. The first time you ask it to sign you up for something, it sets up your details automatically.
       </p>
 
-      {/* Steps */}
-      <div className="space-y-8">
-        {/* Step 1: Install + create vault */}
-        <StepBlock
-          number={1}
-          title="Create your vault"
-          active={step >= 1}
-          done={step > 1}
-        >
-          <p className="text-sm text-muted mb-4">
-            Run this in your terminal. It asks for your name, email, and a password
-            to encrypt everything. Your data stays in a single file on your device.
-          </p>
-          <CodeBlock
-            code="npx @vouch/cli init"
-            language="terminal"
-          />
-          <div className="mt-4 bg-code-bg rounded-xl p-4 text-sm font-mono text-code-fg leading-relaxed">
-            <p className="text-amber-400">$ npx @vouch/cli init</p>
-            <p className="mt-2">Setting up Vouch...</p>
-            <p className="mt-1">What name should we use? <span className="text-zinc-100">Alex Johnson</span></p>
-            <p>Email? <span className="text-zinc-100">alex@example.com</span></p>
-            <p>Set a password to protect your vault: <span className="text-zinc-100">********</span></p>
-            <p className="mt-2 text-emerald-400">Vault created at ~/.vouch/vault.json</p>
-            <p className="text-emerald-400">Ed25519 signing key generated</p>
-            <p className="text-zinc-500 mt-1">Your details are encrypted. Run `vouch status` to check.</p>
-          </div>
-          {step === 1 && (
-            <button
-              onClick={() => setStep(2)}
-              className="mt-4 text-sm text-amber-700 hover:underline"
-            >
-              I&apos;ve done this, next step
-            </button>
-          )}
-        </StepBlock>
-
-        {/* Step 2: Connect to agent */}
-        <StepBlock
-          number={2}
-          title="Connect to your agent"
-          active={step >= 2}
-          done={step > 2}
-        >
-          <p className="text-sm text-muted mb-4">
-            Add Vouch&apos;s MCP tools to your AI agent so it can discover sites
-            and sign you up. Choose your agent:
-          </p>
-
-          <AgentSetup />
-
-          {step === 2 && (
-            <button
-              onClick={() => setStep(3)}
-              className="mt-6 text-sm text-amber-700 hover:underline"
-            >
-              I&apos;ve done this, what&apos;s next?
-            </button>
-          )}
-        </StepBlock>
-
-        {/* Done */}
-        {step >= 3 && (
-          <div className="animate-fade-up bg-card border border-card-border rounded-xl p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-success/10 border border-success/20 flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              <h3 className="font-semibold">You&apos;re ready.</h3>
-            </div>
-            <p className="text-sm text-muted mb-4">
-              Next time you ask your agent to sign you up for something, it&apos;ll
-              check for Vouch support and handle it automatically. Try it:
-            </p>
-            <div className="bg-code-bg border border-card-border rounded-lg p-4 text-sm">
-              <p className="text-zinc-400 italic">&quot;Sign me up for [any-site.com]&quot;</p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function AgentSetup() {
-  const [agent, setAgent] = useState<"claude" | "other">("claude");
-
-  return (
-    <div>
-      <div className="flex gap-2 mb-4">
+      {/* Agent selector */}
+      <div className="flex gap-2 mb-6">
         <button
           onClick={() => setAgent("claude")}
           className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
             agent === "claude"
-              ? "bg-accent/15 text-amber-700 border border-accent/20"
+              ? "bg-amber-50 text-amber-700 border border-amber-200"
               : "text-muted border border-card-border hover:text-foreground"
           }`}
         >
@@ -190,7 +98,7 @@ function AgentSetup() {
           onClick={() => setAgent("other")}
           className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
             agent === "other"
-              ? "bg-accent/15 text-amber-700 border border-accent/20"
+              ? "bg-amber-50 text-amber-700 border border-amber-200"
               : "text-muted border border-card-border hover:text-foreground"
           }`}
         >
@@ -199,43 +107,57 @@ function AgentSetup() {
       </div>
 
       {agent === "claude" && (
-        <div className="space-y-3">
+        <div className="space-y-4">
+          <CodeBlock code="claude mcp add vouch -- npx @vouch/mcp-server" language="terminal" />
           <p className="text-sm text-muted">
-            Add the Vouch MCP server to Claude Code:
-          </p>
-          <CodeBlock
-            code="claude mcp add vouch -- npx @vouch/mcp-server"
-            language="terminal"
-          />
-          <p className="text-sm text-muted">
-            That&apos;s it. Claude will now check for <code className="text-xs px-1 py-0.5 rounded bg-card border border-card-border font-mono">.well-known/vouch.json</code> on
-            any site you ask it to sign up for, and use your vault for the details.
+            Paste this into your terminal. That&apos;s the entire setup.
           </p>
         </div>
       )}
 
       {agent === "other" && (
-        <div className="space-y-3">
+        <div className="space-y-4">
+          <CodeBlock code="npx @vouch/mcp-server" language="terminal" />
           <p className="text-sm text-muted">
-            Install the MCP tools package and point your agent at the server:
+            Point your agent&apos;s MCP settings at this server. It exposes 6 tools for discovering sites and signing you up.
           </p>
-          <CodeBlock
-            code="npm install -g @vouch/mcp-server"
-            language="terminal"
-          />
+        </div>
+      )}
+
+      {/* What happens next */}
+      <div className="mt-10 border-t border-card-border pt-8">
+        <p className="text-sm font-semibold mb-4">What happens next</p>
+        <div className="bg-code-bg rounded-xl p-5 text-sm font-mono text-code-fg leading-relaxed space-y-2">
+          <p><span className="text-zinc-500">You:</span> <span className="text-zinc-100">&quot;Sign me up for acme.com&quot;</span></p>
+          <p><span className="text-zinc-500">Agent:</span> <span className="text-zinc-300">&quot;I need to set up Vouch first. What name should I use?&quot;</span></p>
+          <p><span className="text-zinc-500">You:</span> <span className="text-zinc-100">&quot;Alex Johnson&quot;</span></p>
+          <p><span className="text-zinc-500">Agent:</span> <span className="text-zinc-300">&quot;Email?&quot;</span></p>
+          <p><span className="text-zinc-500">You:</span> <span className="text-zinc-100">&quot;alex@example.com&quot;</span></p>
+          <p><span className="text-zinc-500">Agent:</span> <span className="text-zinc-300">&quot;Set a password to protect your details:&quot;</span></p>
+          <p><span className="text-zinc-500">You:</span> <span className="text-zinc-100">&quot;********&quot;</span></p>
+          <p className="pt-1"><span className="text-zinc-500">Agent:</span> <span className="text-emerald-400">&quot;Done. Signed up for ACME. Check your email.&quot;</span></p>
+          <p className="text-zinc-600 pt-2 text-xs">Your details are saved. Next signup is instant.</p>
+        </div>
+      </div>
+
+      {!done && (
+        <button onClick={() => setDone(true)} className="mt-8 text-sm text-amber-700 hover:underline">
+          I&apos;ve pasted the command
+        </button>
+      )}
+
+      {done && (
+        <div className="mt-8 animate-fade-up bg-card border border-card-border rounded-xl p-6">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </div>
+            <h3 className="font-semibold">You&apos;re ready.</h3>
+          </div>
           <p className="text-sm text-muted">
-            Then configure your agent&apos;s MCP settings to connect to:
-          </p>
-          <CodeBlock
-            code="vouch-mcp-server --vault ~/.vouch/vault.json"
-            language="terminal"
-          />
-          <p className="text-sm text-muted">
-            The server exposes 5 tools: <code className="text-xs px-1 py-0.5 rounded bg-card border border-card-border font-mono">vouch_discover</code>,{" "}
-            <code className="text-xs px-1 py-0.5 rounded bg-card border border-card-border font-mono">vouch_challenge</code>,{" "}
-            <code className="text-xs px-1 py-0.5 rounded bg-card border border-card-border font-mono">vouch_signup</code>,{" "}
-            <code className="text-xs px-1 py-0.5 rounded bg-card border border-card-border font-mono">vouch_status</code>,{" "}
-            <code className="text-xs px-1 py-0.5 rounded bg-card border border-card-border font-mono">vouch_verify</code>.
+            Ask your agent to sign you up for anything. It&apos;ll walk you through saving your details the first time, then handle everything automatically after that.
           </p>
         </div>
       )}
@@ -266,16 +188,14 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
         Add Vouch to your site
       </h1>
       <p className="text-muted mb-10">
-        Three steps: install the package, add the handler, deploy. Every AI agent
-        will be able to discover your site and register users.
+        Three steps: install, add the handler, deploy. Every AI agent will discover your site.
       </p>
 
       <div className="space-y-8">
-        {/* Step 1: Install */}
         <StepBlock number={1} title="Install the SDK" active={step >= 1} done={step > 1}>
           <CodeBlock code="npm install @vouch/site" language="terminal" />
           <p className="text-sm text-muted mt-3">
-            Works with any Node.js framework: Next.js, Express, Fastify, Hono.
+            Works with Next.js, Express, Fastify, Hono -- any Node.js framework.
           </p>
           {step === 1 && (
             <button onClick={() => setStep(2)} className="mt-4 text-sm text-amber-700 hover:underline">
@@ -284,37 +204,21 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
           )}
         </StepBlock>
 
-        {/* Step 2: Add handler */}
         <StepBlock number={2} title="Add the signup handler" active={step >= 2} done={step > 2}>
           <p className="text-sm text-muted mb-4">
-            Create an API route that handles agent signups. This one function serves
-            the discovery manifest, validates consent tokens, and processes registrations.
+            One function that serves the discovery manifest, validates consent, and processes signups.
           </p>
-
           <div className="bg-code-bg border border-card-border rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-              <span className="ml-3 text-xs text-zinc-500 font-mono">app/api/vouch/[...path]/route.ts</span>
+              <span className="ml-3 text-xs text-zinc-500 font-mono">route.ts</span>
             </div>
             <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-code-fg">
               <code>{businessCodeExample}</code>
             </pre>
           </div>
-
-          <p className="text-sm text-muted mt-4">
-            Then add a rewrite so agents can discover you:
-          </p>
-          <div className="bg-code-bg border border-card-border rounded-xl overflow-hidden mt-3">
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800">
-              <span className="ml-0 text-xs text-zinc-500 font-mono">next.config.ts</span>
-            </div>
-            <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-code-fg">
-              <code>{rewriteExample}</code>
-            </pre>
-          </div>
-
           {step === 2 && (
             <button onClick={() => setStep(3)} className="mt-4 text-sm text-amber-700 hover:underline">
               Added, next step
@@ -322,24 +226,11 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
           )}
         </StepBlock>
 
-        {/* Step 3: Deploy */}
         <StepBlock number={3} title="Deploy" active={step >= 3} done={step > 3}>
           <p className="text-sm text-muted mb-4">
-            Deploy your app. Once live, any AI agent can discover your signup
-            requirements at:
+            Deploy your app. Test by fetching the manifest:
           </p>
-          <CodeBlock
-            code="https://yoursite.com/.well-known/vouch.json"
-            language="url"
-          />
-          <p className="text-sm text-muted mt-4">
-            Test it by fetching the manifest:
-          </p>
-          <CodeBlock
-            code="curl https://yoursite.com/.well-known/vouch.json | jq"
-            language="terminal"
-          />
-
+          <CodeBlock code="curl https://yoursite.com/.well-known/vouch.json | jq" language="terminal" />
           {step === 3 && (
             <button onClick={() => setStep(4)} className="mt-4 text-sm text-amber-700 hover:underline">
               Deployed
@@ -347,22 +238,18 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
           )}
         </StepBlock>
 
-        {/* Done */}
         {step >= 4 && (
           <div className="animate-fade-up bg-card border border-card-border rounded-xl p-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-success/10 border border-success/20 flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
               </div>
               <h3 className="font-semibold">Your site is Vouch-enabled.</h3>
             </div>
             <p className="text-sm text-muted">
-              AI agents can now discover your site and sign up users with
-              verified, cryptographic consent. No marketplace listing needed --
-              the <code className="text-xs px-1.5 py-0.5 rounded bg-surface border border-card-border font-mono text-foreground">.well-known/vouch.json</code> manifest
-              is your storefront.
+              AI agents can now discover your site and sign up users with verified consent. No marketplace listing needed.
             </p>
           </div>
         )}
@@ -375,73 +262,36 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
    SHARED COMPONENTS
    ============================================================ */
 
-function PathCard({
-  onClick,
-  icon,
-  title,
-  description,
-  cta,
-}: {
-  onClick: () => void;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  cta: string;
+function PathCard({ onClick, icon, title, description, cta }: {
+  onClick: () => void; icon: React.ReactNode; title: string; description: string; cta: string;
 }) {
   return (
-    <button
-      onClick={onClick}
-      className="group bg-card border border-card-border rounded-xl p-6 text-left hover:border-accent/30 transition-all"
-    >
-      <div className="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 mb-5">
-        {icon}
-      </div>
-      <h3 className="text-lg font-semibold mb-2 group-hover:text-amber-700 transition-colors">
-        {title}
-      </h3>
+    <button onClick={onClick} className="group bg-card border border-card-border rounded-xl p-6 text-left hover:border-accent/30 transition-all">
+      <div className="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 mb-5">{icon}</div>
+      <h3 className="text-lg font-semibold mb-2 group-hover:text-amber-700 transition-colors">{title}</h3>
       <p className="text-sm text-muted leading-relaxed mb-5">{description}</p>
       <span className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-700">
         {cta}
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </span>
     </button>
   );
 }
 
-function StepBlock({
-  number,
-  title,
-  active,
-  done,
-  children,
-}: {
-  number: number;
-  title: string;
-  active: boolean;
-  done: boolean;
-  children: React.ReactNode;
+function StepBlock({ number, title, active, done, children }: {
+  number: number; title: string; active: boolean; done: boolean; children: React.ReactNode;
 }) {
   return (
     <div className={`transition-opacity ${active ? "opacity-100" : "opacity-30 pointer-events-none"}`}>
       <div className="flex items-center gap-3 mb-4">
-        <div
-          className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
-            done
-              ? "bg-success/15 text-success border border-success/20"
-              : active
-                ? "bg-accent/15 text-amber-700 border border-accent/20"
-                : "bg-card border border-card-border text-muted"
-          }`}
-        >
+        <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
+          done ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+            : active ? "bg-amber-50 text-amber-700 border border-amber-200"
+              : "bg-card border border-card-border text-muted"
+        }`}>
           {done ? (
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-          ) : (
-            number
-          )}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+          ) : number}
         </div>
         <h3 className="font-semibold">{title}</h3>
       </div>
@@ -452,35 +302,23 @@ function StepBlock({
 
 function CodeBlock({ code, language }: { code: string; language: string }) {
   const [copied, setCopied] = useState(false);
-
   async function copy() {
     try {
       await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for older browsers or no clipboard permission
-      const textarea = document.createElement("textarea");
-      textarea.value = code;
-      textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const ta = document.createElement("textarea");
+      ta.value = code; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy");
+      document.body.removeChild(ta);
     }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
-
   return (
     <div className="group relative bg-code-bg border border-card-border rounded-lg px-4 py-3 font-mono text-sm">
       {language === "terminal" && <span className="text-zinc-500 select-none">$ </span>}
       <span className="text-code-fg">{code}</span>
-      <button
-        onClick={copy}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-500 hover:text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity"
-      >
+      <button onClick={copy} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-500 hover:text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity">
         {copied ? "Copied" : "Copy"}
       </button>
     </div>
@@ -488,21 +326,11 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 }
 
 function UserIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  );
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>;
 }
 
 function BuildingIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
-      <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M8 10h.01M16 10h.01M12 14h.01M8 14h.01M16 14h.01" />
-    </svg>
-  );
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M8 10h.01M16 10h.01M12 14h.01M8 14h.01M16 14h.01" /></svg>;
 }
 
 const businessCodeExample = `import { createVouchHandler } from "@vouch/site";
@@ -520,29 +348,15 @@ const handler = createVouchHandler({
       { field: "name", type: "string", label: "Name" },
     ],
   },
-  onSignup: async (data, metadata) => {
+  onSignup: async (data) => {
     const user = await db.users.create({
       email: data.email,
       name: data.name,
       source: "vouch",
-      agentId: metadata.agentName,
     });
     return { userId: user.id };
   },
 });
 
 export const GET = handler.GET;
-export const POST = handler.POST;
-export const DELETE = handler.DELETE;`;
-
-const rewriteExample = `// next.config.ts
-const config = {
-  rewrites: async () => [
-    {
-      source: "/.well-known/vouch.json",
-      destination: "/api/vouch/manifest",
-    },
-  ],
-};
-
-export default config;`;
+export const POST = handler.POST;`;
