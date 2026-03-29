@@ -102,14 +102,14 @@ function UserPath({ onBack }: { onBack: () => void }) {
             language="terminal"
           />
           <div className="mt-4 bg-code-bg rounded-xl p-4 text-sm font-mono text-code-fg leading-relaxed">
-            <p className="text-amber-700">$ npx @vouch/cli init</p>
+            <p className="text-amber-400">$ npx @vouch/cli init</p>
             <p className="mt-2">Setting up Vouch...</p>
-            <p className="mt-1">What name should we use? <span className="text-foreground">Alex Johnson</span></p>
-            <p>Email? <span className="text-foreground">alex@example.com</span></p>
-            <p>Set a password to protect your vault: <span className="text-foreground">********</span></p>
-            <p className="mt-2 text-success">Vault created at ~/.vouch/vault.json</p>
-            <p className="text-success">Ed25519 signing key generated</p>
-            <p className="text-muted mt-1">Your details are encrypted. Run `vouch status` to check.</p>
+            <p className="mt-1">What name should we use? <span className="text-zinc-100">Alex Johnson</span></p>
+            <p>Email? <span className="text-zinc-100">alex@example.com</span></p>
+            <p>Set a password to protect your vault: <span className="text-zinc-100">********</span></p>
+            <p className="mt-2 text-emerald-400">Vault created at ~/.vouch/vault.json</p>
+            <p className="text-emerald-400">Ed25519 signing key generated</p>
+            <p className="text-zinc-500 mt-1">Your details are encrypted. Run `vouch status` to check.</p>
           </div>
           {step === 1 && (
             <button
@@ -161,7 +161,7 @@ function UserPath({ onBack }: { onBack: () => void }) {
               check for Vouch support and handle it automatically. Try it:
             </p>
             <div className="bg-code-bg border border-card-border rounded-lg p-4 text-sm">
-              <p className="text-muted italic">&quot;Sign me up for [any-site.com]&quot;</p>
+              <p className="text-zinc-400 italic">&quot;Sign me up for [any-site.com]&quot;</p>
             </div>
           </div>
         )}
@@ -291,14 +291,14 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
             the discovery manifest, validates consent tokens, and processes registrations.
           </p>
 
-          <div className="bg-card border border-card-border rounded-xl overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-card-border">
+          <div className="bg-code-bg border border-card-border rounded-xl overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-              <span className="ml-3 text-xs text-muted font-mono">app/api/vouch/[...path]/route.ts</span>
+              <span className="ml-3 text-xs text-zinc-500 font-mono">app/api/vouch/[...path]/route.ts</span>
             </div>
-            <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-muted">
+            <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-code-fg">
               <code>{businessCodeExample}</code>
             </pre>
           </div>
@@ -306,11 +306,11 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
           <p className="text-sm text-muted mt-4">
             Then add a rewrite so agents can discover you:
           </p>
-          <div className="bg-card border border-card-border rounded-xl overflow-hidden mt-3">
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-card-border">
-              <span className="ml-0 text-xs text-muted font-mono">next.config.ts</span>
+          <div className="bg-code-bg border border-card-border rounded-xl overflow-hidden mt-3">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800">
+              <span className="ml-0 text-xs text-zinc-500 font-mono">next.config.ts</span>
             </div>
-            <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-muted">
+            <pre className="p-5 overflow-x-auto text-xs leading-relaxed font-mono text-code-fg">
               <code>{rewriteExample}</code>
             </pre>
           </div>
@@ -361,7 +361,7 @@ function BusinessPath({ onBack }: { onBack: () => void }) {
             <p className="text-sm text-muted">
               AI agents can now discover your site and sign up users with
               verified, cryptographic consent. No marketplace listing needed --
-              the <code className="text-xs px-1 py-0.5 rounded bg-code-bg border border-card-border font-mono">.well-known/vouch.json</code> manifest
+              the <code className="text-xs px-1.5 py-0.5 rounded bg-surface border border-card-border font-mono text-foreground">.well-known/vouch.json</code> manifest
               is your storefront.
             </p>
           </div>
@@ -475,11 +475,11 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 
   return (
     <div className="group relative bg-code-bg border border-card-border rounded-lg px-4 py-3 font-mono text-sm">
-      {language === "terminal" && <span className="text-muted select-none">$ </span>}
-      <span className="text-foreground">{code}</span>
+      {language === "terminal" && <span className="text-zinc-500 select-none">$ </span>}
+      <span className="text-code-fg">{code}</span>
       <button
         onClick={copy}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-500 hover:text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity"
       >
         {copied ? "Copied" : "Copy"}
       </button>
